@@ -2128,6 +2128,11 @@ net_info_namespace() {
 		fi
 	done
 
+	IPSET_BIN=$(command -v ipset)
+	if [[ -x $IPSET_BIN ]]; then
+		log_cmd $OF "${NS}${IPSET_BIN} list"
+	fi
+
 	if rpm_verify $OF nftables
 	then
 		log_cmd $OF "${NS}nft list tables"
